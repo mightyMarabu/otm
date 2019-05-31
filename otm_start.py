@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, jsonify
+from flask import Flask, render_template, request, Response, jsonify
 from db_conn import insert_into_db, resetMap, getDatafromDB
 import json
 
@@ -19,6 +19,16 @@ def saveData(name,lastname,insurNr,insurName):
     dat = insert_into_db("insert_patientdata", (lastname,name,insurNr,insurName))
     #return Response(json.dumps(dat), mimetype = "application/json")
     return jsonify("data submitted!")
+
+@app.route('/result',methods = ['POST', 'GET'])
+def result():
+   if request.method == 'POST':
+      result = request.form
+      return render_template("result.html",result = result)
+
+
+
+
 
 @app.route("/getData/")
 def getTableData():
