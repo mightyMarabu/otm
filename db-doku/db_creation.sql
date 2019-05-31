@@ -7,3 +7,12 @@ create table patienten
 /*to do:
     -produkt-table
     -gangbild-table
+*/
+create or replace function insert_patientdata(lastname varchar, name varchar, insurNr varchar, insurName varchar)
+returns void as
+$$
+insert into patienten (name, vorname, versicherungsnummer, versicherung)
+values (lastname, name, insurNr, insurName)
+$$
+
+language sql
