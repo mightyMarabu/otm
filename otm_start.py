@@ -17,8 +17,8 @@ def submit():
 @app.route("/save/<lastname>/<name>/<insurNr>/<insurName>/")
 def saveData(name,lastname,insurNr,insurName):
     dat = insert_into_db("insert_patientdata", (lastname,name,insurNr,insurName))
-    return Response(json.dumps(dat), mimetype = "application/json")
-    #return jsonify("data submitted!")
+    #return Response(json.dumps(dat), mimetype = "application/json")
+    return jsonify("data submitted!")
 
 @app.route("/getData/")
 def getTableData():
