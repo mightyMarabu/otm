@@ -14,10 +14,11 @@ def submit():
     sub = insert_into_db()
     return Response(json.dumps(sub), mimetype = "application/json")
 
-@app.route("/save/<lat>/<lng>/<radius>/<lastname>/<more>/<use>")
-def savePoint(lat, lng, radius, lastname, more, use):
-    poi = insert_into_db("landbook.insert_data", (lat,lng,radius,lastname,more,use))
-    return jsonify("data submitted!")
+@app.route("/save/<lastname>/<name>/<insurNr>/<insurName>/")
+def saveData(name,lastname,insurNr,insurName):
+    dat = insert_into_db("insert_patientdata", (lastname,name,insurNr,insurName))
+    return Response(json.dumps(dat), mimetype = "application/json")
+    #return jsonify("data submitted!")
 
 @app.route("/getData/")
 def getTableData():

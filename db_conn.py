@@ -16,7 +16,7 @@ insurance_name = 'ABC'
 #conn_str = psycopg2.connect(dbname='postgres', user='postgres', host='192.168.70.134', port='54322', password='postgres')"
 
 def insert_into_db(function = "insert_patientdata", params=(lastname, name, insurance_nr, insurance_name)):
-    connect = psycopg2.connect(dbname='postgres', user='postgres', host='163.172.133.143', port='9876', password='postgres')
+    connect = psycopg2.connect(dbname='otm', user='postgres', host='163.172.133.143', port='9876', password='postgres')
     cur = connect.cursor()
     cur.execute("select insert_patientdata(%s,%s,%s,%s)", params)
     connect.commit()
