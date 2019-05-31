@@ -9,8 +9,6 @@ def index():
 
 @app.route("/save/")
 def submit():
-#    sub = {"id":"2"}
-#    sub = ["What am", "I doing?"]
     sub = insertIntoDB()
     return Response(json.dumps(sub), mimetype = "application/json")
 
