@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, Response, jsonify
-from db_conn import insert_into_db, resetMap, getDatafromDB
+from db_conn import insertIntoDB, resetMap, getDatafromDB
 import json
 
 app = Flask(__name__)
@@ -9,22 +9,21 @@ def index():
 
 @app.route("/save/")
 def submit():
-#    sub = {"id":"2"}
-#    sub = ["What am", "I doing?"]
-    sub = insert_into_db()
+    sub = insertIntoDB()
     return Response(json.dumps(sub), mimetype = "application/json")
 
 @app.route("/save/<lastname>/<name>/<insurNr>/<insurName>/")
 def saveData(name,lastname,insurNr,insurName):
-    dat = insert_into_db("insert_patientdata", (lastname,name,insurNr,insurName))
-    #return Response(json.dumps(dat), mimetype = "application/json")
+    data = insertIntoDB("insert_patientdata", (lastname,name,insurNr,insurName))
+    #return Response(json.dumps(data), mimetype = "application/json")
     return jsonify("data submitted!")
-
+    
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
    if request.method == 'POST':
       result = request.form
-      return render_template("result.html",result = result)
+    #  return render_template("result.html",result = result)
+      return Response(json.dumps(result), mimetype = "application/json")
 
 
 
