@@ -25,6 +25,24 @@
         #map {
             height: 6em;
         };
+        #marker {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #088;
+        border-radius: 10px;
+        background-color: #0FF;
+        opacity: 0.5;
+      }
+        #movimento {
+        text-decoration: none;
+        color: white;
+        font-size: 11pt;
+        font-weight: bold;
+        text-shadow: black 0.1em 0.1em 0.2em;
+      }
+      .popover-content {
+        min-width: 180px;
+      }
         </style>
     
     <title>Movimento Sandbox</title>
@@ -133,7 +151,16 @@
         <div class="row">
             <div class="col-sm-12" style="text-align: right; background-color: yellow">
             <div id="map", class="map"></div>
-            <script>
+            
+            <!-- marker -->
+            <div style="display: none">
+              
+              <a class="overlay" id="movimento" target="_blank" href="http://ot-movimento.de">Movimento</a>
+              <div id="marker" title="Marker"></div>
+            
+              <div id="popup" title="Welcome to Movimento"></div>
+          </div>
+          <script>
             //base-layer
             var osm = new ol.layer.Tile({
                 source: new ol.source.OSM()
@@ -143,10 +170,21 @@
                 target: 'map',
                 layers: [osm],
                 view: new ol.View({
-                    center: ol.proj.fromLonLat([4, 48]),
+                    center: ol.proj.fromLonLat([9, 52]),
                     zoom: 6
                     })
-            });    
+            });
+            //marker overlay
+            var pos = ol.proj.fromLonLat([9, 52]);
+
+            // movi marker
+            var marker = new ol.Overlay({
+            position: pos,
+            positioning: 'center-center',
+            element: document.getElementById('marker'),
+            stopEvent: false
+            });
+            map.addOverlay(marker);
             </script>
             
             </div>
