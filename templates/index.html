@@ -22,7 +22,6 @@
 
 
         <style>
-       
         #map {
             height: 6em;
         };
@@ -46,11 +45,11 @@
                 <h4>getting started:</h4>
                 <div id='form'>
                     <form action = "http://localhost:5000/result" method = "POST">
-                            <p>Name: <input type = "text" name = "lastname" /></p>
-                            <p>Vorname: <input type = "text" name = "name" /></p>
-                            <p>Vers.-Nummer: <input type = "text" name = "insurNr" /></p>
-                            <p>Versicherung: <input type ="text" name = "insurName" /></p>
-                            <p><input type = "submit" value = "submit" /></p>
+                            <p>Name: <input type = "text" id = "lastname" /></p>
+                            <p>Vorname: <input type = "text" id = "name" /></p>
+                            <p>Vers.-Nummer: <input type = "text" id = "insurNr" /></p>
+                            <p>Versicherung: <input type ="text" id = "insurName" /></p>
+    <!--works if 'id' = 'name'     <p><input type = "submit" value = "test" /></p> -->
                     </form>
 
                     <button onclick="insertIntoDB(form)">save</button>
