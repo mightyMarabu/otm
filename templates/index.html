@@ -10,127 +10,188 @@
         <link rel="stylesheet" type="text/css" href="static/bootstrap-4.3.1-dist/css/bootstrap.min.css"/>
         <script src="static/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 
-<!--       <link rel="stylesheet" type="text/css" href="/static/DataTables-1.10.18/css/datatables.min.css"/>
+        <script src="static/js/ol.js"></script>
+        <link rel="stylesheet" shref="static/css/ol.css">
+<!--        <link rel="stylesheet" shref="static/css/ol.css.map">-->
+        <link rel="stylesheet" shref="static/css/ol-layerswitcher.css">
+        
 
-        <script src="static/js/resources/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/DataTables-1.10.18/css/datatables.min.css"/>
         <script type="text/javascript" src="/static/jQuery-3.3.1/jquery-3.3.1.js"></script>
         <script type="text/javascript" src="/static/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 
 
         <style>
-       
         #map {
-            height: 20%;
-        }
+            height: 6em;
+        };
+        #marker {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #088;
+        border-radius: 10px;
+        background-color: #0FF;
+        opacity: 0.5;
+      }
+        #movimento {
+        text-decoration: none;
+        color: white;
+        font-size: 11pt;
+        font-weight: bold;
+        text-shadow: black 0.1em 0.1em 0.2em;
+      }
+      .popover-content {
+        min-width: 180px;
+      }
         </style>
-   --> 
+    
     <title>Movimento Sandbox</title>
     </head>
-    <body>
+    <body style="background-color: gray">
 
 
-
-    <div class="jumbotron text-center">
+    <div class="container">
+    <div class="jumbotron-fluid text-center">
             <h1>Movimento Sandbox</h1>
-            <p>Resize this responsive page to see the effect!</p> 
-            </div>
+            <p>...</p> 
+    </div>
+    </div>  
             
-            <div class="container">
-            <div class="row">
-                <div class="col-sm-4" style="text-align: right; background-color: yellow">
-                    <h4>getting started:</h4>
+    <div class="container">
+        <div class="row d-flex justify-contend-center" style="padding-bottom: 10px; background-color: gray">
+            <div class="col-sm-3" style="margin: 1em; text-align: right; background-color: rgb(0, 255, 76)">
+                <h4>getting started:</h4>
+                <div id='form'>
                     <form action = "http://localhost:5000/result" method = "POST">
-                        
-                            <p>Name: <input type = "text" name = "lastname" /></p>
-                            <p>Vorname: <input type = "text" name = "name" /></p>
-                            <p>Vers.-Nummer: <input type = "text" name = "insurNr" /></p>
-                            <p>Versicherung: <input type ="text" name = "insurName" /></p>
-                            <p><input type = "submit" value = "submit" /></p>
-                        
+                            <p>Name: <input type = "text" id = "lastname" /></p>
+                            <p>Vorname: <input type = "text" id = "name" /></p>
+                            <p>Vers.-Nummer: <input type = "text" id = "insurNr" /></p>
+                            <p>Versicherung: <input type ="text" id = "insurName" /></p>
+    <!--works if 'id' = 'name'     <p><input type = "submit" value = "test" /></p> -->
                     </form>
-        
-                        <button onclick="insertIntoDB()">save</button>
-                        <script>
+
+                    <button onclick="insertIntoDB(form)">save</button>
+                    <script>
+                        "use strict"
                         function insertIntoDB() {
                             console.log("saving data...");
                             $.getJSON({
-                            url: `/save/<lastname>/<name>/<insurNr>/<insurName>/`,
+                            url: `/save/${$("#lastname").val()}/${$("#name").val()}/${$("#insurNr").val()}/${$("#insurName").val()}/`,
                             success: data => {
                             console.log(data);
                             }
                             })   
                         };    
                     </script>
-                    </div>
-                 
-                
-                <div class="col-sm-4" style="background-color: rgb(0, 255, 64)">
-                        <h4>Wähle..</h4>
-                        <div id='Gangbild'>
-                                <p>Gangbild: <select id="Gangbild">
-                                    <option value="1">Typ 1</option>
-                                    <option value="2">Typ 2</option>
-                                    <option value="3">Typ 3</option>
-                                </select></p>
-                        </div>       
                 </div>
-                
-                
-        <div class="col-sm-4" style="background-color: rgb(241, 80, 220)">
-                 <!----------Datatable------------------------------------------------------------------------------->
-         <table class="display" id="example" style="width:20%">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-        </table>
-    
-        <script>
-            "use strict";
-
-            var testData = () => {
-                //$.getJSON("sample-data")
-                $.getJSON("/getData")
-                    .done(data => {
-                        console.log(data);
-                        fillDataTable(data);
-                    })
-                    .fail("Something went wrong, folks!");
-            };
-
-            var fillDataTable = (data) => {
-                $('#example').DataTable({
-                    data: data,
-                    columns: [
-                        { data: 'id' },
-                        { data: 'description' }
-                    ]
-                });
-            };
-
-            console.log("Welcome to the machine!");
-            testData();
-        </script>
-            
-    
-        <script>
-        // get Radius
-        var getRadius = function(){
-            return parseFloat($("#radius").val());
-        }
-        console.log(getRadius())
+            </div> <!--gruen-->
+                                    
+            <div class="col-sm-4" style="margin:1em; background-color: rgb(3, 187, 219)">
+                <h4>Wähle..</h4>
+                <div id='Gangbild'>
+                        <p>Gangbild: <select id="Gangbild">
+                            <option value="1">Typ 1</option>
+                            <option value="2">Typ 2</option>
+                            <option value="3">Typ 3</option>
+                        </select></p>
+                </div>       
+            </div><!--blau-->
                     
+            <div class="col-sm-3" style="margin: 1em; background-color: rgb(138, 6, 120)">
+                        <!----------Datatable-------------------------------------------------------------------------------->
+                <table class="display" id="example" style="width:20%">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            
+    <!--            <script>
+                    "use strict";
+                    var testData = () => {
+                        //$.getJSON("sample-data")
+                        $.getJSON("/getData")
+                            .done(data => {
+                                console.log(data);
+                                fillDataTable(data);
+                            })
+                            .fail("Something went wrong, folks!");
+                    };
+    
+                    var fillDataTable = (data) => {
+                        $('#example').DataTable({
+                            data: data,
+                            columns: [
+                                { data: 'id' },
+                                { data: 'description' }
+                            ]
+                        });
+                    };
+    -->
+                    console.log("Welcome to the machine!");
+                    testData();
+                </script>
+                    
+            <!--
+                <script>
+                // get Radius
+                var getRadius = function(){
+                    return parseFloat($("#radius").val());
+                }
+                console.log(getRadius())
+                            
+                </script>
+    -->     </div>    <!--lila-->
+        </div>
+            
+        <div class="row">
+            <div class="col-sm-12" style="text-align: right; background-color: yellow">
+            <div id="map", class="map"></div>
+            
+            <!-- marker -->
+            <div style="display: none">
+              
+              <a class="overlay" id="movimento" target="_blank" href="http://ot-movimento.de">Movimento</a>
+              <div id="marker" title="Marker"></div>
+            
+              <div id="popup" title="Welcome to Movimento"></div>
+          </div>
+          <script>
+            //base-layer
+            var osm = new ol.layer.Tile({
+                source: new ol.source.OSM()
+                }); 
+
+            var map = new ol.Map({
+                target: 'map',
+                layers: [osm,],
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([9.5, 51.3]),
+                    zoom: 12
+                    })
+            });
+            // movi marker
+            var movi_ks = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([9.5502, 51.29583])
+            ), 
+            });
+            var vectorSource = new ol.source.Vector({
+            features: [movi_ks]
+            });
+            var markerVectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            });
+            map.addLayer(markerVectorLayer);
             </script>
             
-        </div>
-
-
-
-            
+            </div>
+        </div>   <!--row-->  
+    </div>    <!--container-->   
 
 
 
