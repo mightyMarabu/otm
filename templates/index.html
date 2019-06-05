@@ -168,23 +168,25 @@
 
             var map = new ol.Map({
                 target: 'map',
-                layers: [osm],
+                layers: [osm,],
                 view: new ol.View({
-                    center: ol.proj.fromLonLat([9, 52]),
-                    zoom: 6
+                    center: ol.proj.fromLonLat([9.5, 51.3]),
+                    zoom: 12
                     })
             });
-            //marker overlay
-            var pos = ol.proj.fromLonLat([9, 52]);
-
             // movi marker
-            var marker = new ol.Overlay({
-            position: pos,
-            positioning: 'center-center',
-            element: document.getElementById('marker'),
-            stopEvent: false
+            var movi_ks = new ol.Feature({
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([9.5502, 51.29583])
+            ), 
             });
-            map.addOverlay(marker);
+            var vectorSource = new ol.source.Vector({
+            features: [movi_ks]
+            });
+            var markerVectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            });
+            map.addLayer(markerVectorLayer);
             </script>
             
             </div>
