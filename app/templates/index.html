@@ -16,22 +16,22 @@
         <link rel="stylesheet" shref="static/css/ol-layerswitcher.css">
         
 
-        <link rel="stylesheet" type="text/css" href="/static/DataTables-1.10.18/css/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/DataTables-1.10.18/css/datatables.bootstrap-4.css"/>
         <script type="text/javascript" src="/static/jQuery-3.3.1/jquery-3.3.1.js"></script>
         <script type="text/javascript" src="/static/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 
 
         <style>
         #map {
-            height: 6em;
+            height: 10em;
         };
         #marker {
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
         border: 1px solid #088;
-        border-radius: 10px;
-        background-color: #0FF;
-        opacity: 0.5;
+        border-radius: 15px;
+        background-color: rgb(185, 0, 139);
+        opacity: 0.7;
       }
         #movimento {
         text-decoration: none;
@@ -97,43 +97,49 @@
                 </div>       
             </div><!--blau-->
                     
-            <div class="col-sm-3" style="margin: 1em; background-color: rgb(138, 6, 120)">
+            <div class="col-sm-3" style="margin: 1em;  background-color: rgb(138, 6, 120)">
                 <!----------Datatable-------------------------------------------------------------------------------->
-                <table class="display" id="example" style="width:20%">
+                <table id="example" class="table table-striped table-bordered" style="width:100%; color: cornsilk">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>description</th>
+                            <th>Name</th>
+                            <th>Vorname</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
             
-    <!--            <script>
+                <script>
                     "use strict";
-                    var testData = () => {
+                    var persData = () => {
                         //$.getJSON("sample-data")
-                        $.getJSON("/getData")
-                            .done(data => {
-                                console.log(data);
-                                fillDataTable(data);
+                        $.getJSON("/getData/")
+                            .done(per_data => {
+                                console.log("Personal Info:",per_data);
+                                // fillDataTable(per_data);
+                                datatable.clear();
+                                datatable.rows.add(per_data);
+                                datatable.draw();
                             })
                             .fail("Something went wrong, folks!");
                     };
     
-                    var fillDataTable = (data) => {
-                        $('#example').DataTable({
-                            data: data,
+                    //var fillDataTable = (data) => {
+                    var initDataTable = () => {
+                        return $('#example').DataTable({
                             columns: [
                                 { data: 'id' },
-                                { data: 'description' }
+                                { data: 'name' },
+                                { data: 'vorname' },
                             ]
                         });
                     };
-    -->
+                                      
                     console.log("Welcome to the machine!");
-                    testData();
+                    var datatable = initDataTable();
+                    persData();
                 </script>
                     
             <!--
