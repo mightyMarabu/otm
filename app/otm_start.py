@@ -25,15 +25,14 @@ def result():
     #  return render_template("result.html",result = result)
       return Response(json.dumps(result), mimetype = "application/json")
 
-
-
-
-
 @app.route("/getData/")
 def getTableData():
     dat = getDatafromDB()
     return Response(json.dumps(dat), mimetype = "application/json")
-    print("dat")
+    #print("dat")
+
+
+
 
 @app.route("/reset/")
 def reset():
