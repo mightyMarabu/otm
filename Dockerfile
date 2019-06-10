@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get install -y git
 RUN apt-get install -y python-pip python-dev build-essential
 
-WORKDIR /app
+WORKDIR /
 
 #RUN pip install --trusted-host pypi.python.org -r requirements.txt
 RUN pip install --upgrade pip
@@ -24,4 +24,4 @@ EXPOSE 80
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "/app/otm/otm_start.py"]
+CMD ["python", "/otm/app/otm_start.py"]
