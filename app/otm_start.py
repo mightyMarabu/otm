@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, Response, jsonify
-from db_conn import insertIntoDB, resetMap, getDatafromDB
+from db_conn import insertIntoDB, resetMap, getDatafromDB, getInsurData
 import json
 
 app = Flask(__name__)
@@ -28,6 +28,12 @@ def result():
 @app.route("/getData/")
 def getTableData():
     dat = getDatafromDB()
+    return Response(json.dumps(dat), mimetype = "application/json")
+    #print("dat")
+
+@app.route("/getInsurData/")
+def getTableData():
+    dat = getInsurData()
     return Response(json.dumps(dat), mimetype = "application/json")
     #print("dat")
 
