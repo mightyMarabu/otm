@@ -38,10 +38,10 @@ def getInsurData():
     connect = psycopg2.connect(dbname='otm', user='postgres', host='163.172.133.143', port='9876', password='postgres')
     cur = connect.cursor(cursor_factory = RealDictCursor)
     cur.execute("select count(*) as sum, versicherung from patienten group by versicherung")
-    data = cur.fetchall()
+    insurdata = cur.fetchall()
     connect.commit()
     connect.close()
-    return data
+    return insurdata
 
 
 def resetMap(function = "landbook.reset_rawdata"):

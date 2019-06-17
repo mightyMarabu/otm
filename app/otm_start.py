@@ -32,10 +32,10 @@ def getTableData():
     #print("dat")
 
 @app.route("/getInsurData/")
-def getTableData():
-    dat = getInsurData()
-    return Response(json.dumps(dat), mimetype = "application/json")
-    #print("dat")
+def getInsuranceData():
+    inda = getInsurData()
+    return Response(json.dumps(inda), mimetype = "application/json")
+    #print("inda")
 
 
 
