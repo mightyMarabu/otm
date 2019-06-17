@@ -164,32 +164,36 @@
         </div>
         
         <div class="row d-flex justify-contend-center" style="padding-bottom: 10px; background-color: gray">
-            <div class="col-sm-5" style="margin: 1em; color: cornsilk; text-align: center; background-color: rgb(151, 1, 1)">
-                <canvas id="myChart"></canvas>
+            <div class="col-sm-6" style="margin: 1em; color: cornsilk; text-align: center; background-color: rgb(209, 164, 252)">
+                <canvas id="myChart" style="height:100%"></canvas>
                 <script>    
                     var ctx = document.getElementById('myChart').getContext('2d');
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
-                        type: 'line',
+                        type: 'polarArea',
                     
                         // The data for our dataset
                         data: {
-                            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                            labels: ['A', 'B', 'C', 'D', 'E'],
                             datasets: [{
-                                label: 'My First dataset',
-                                backgroundColor: 'rgb(255, 99, 132)',
-                                borderColor: 'rgb(255, 99, 132)',
-                                data: [0, 10, 5, 2, 20, 30, 45]
+                                backgroundColor: ['blue','yellow', 'green', 'rgb(138, 6, 120)', 'grey'],
+                                borderColor: 'gray',
+                                data: [1, 4, 5, 2, 3]
                             }]
                         },
-                    
+
                         // Configuration options go here
-                        options: {}
-                    });
+                        options: {
+                            title: {
+                                    display: true,
+                                    text: 'Anzahl Versicherte pro Versicherung',
+                                    },
+                            text: '19px'
+                        }});
                 </script>
             </div>
         
-            <div class="col-sm-5" style="margin: 1em; text-align: right; background-color: yellow">
+            <div class="col-sm-5" style="margin: 1em; padding-top: 1em; text-align: right; background-color: yellow">
             
                 <div id="map", class="map"></div>
                 <div style="display: none">
