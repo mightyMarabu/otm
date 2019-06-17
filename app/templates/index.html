@@ -27,7 +27,7 @@
 
         <style>
         #map {
-            height: 10em;
+            height: auto;
         };
         #marker {
         width: 25px;
@@ -164,7 +164,7 @@
         </div>
         
         <div class="row d-flex justify-contend-center" style="padding-bottom: 10px; background-color: gray">
-            <div class="col-sm-5" style="text-align: center; background-color: rgb(151, 1, 1)">
+            <div class="col-sm-5" style="margin: 1em; color: cornsilk; text-align: center; background-color: rgb(151, 1, 1)">
                 <canvas id="myChart"></canvas>
                 <script>    
                     var ctx = document.getElementById('myChart').getContext('2d');
@@ -188,8 +188,8 @@
                     });
                 </script>
             </div>
-            </div>
-            <div class="col-sm-5" style="text-align: right; background-color: yellow">
+        
+            <div class="col-sm-5" style="margin: 1em; text-align: right; background-color: yellow">
             
                 <div id="map", class="map"></div>
                 <div style="display: none">
