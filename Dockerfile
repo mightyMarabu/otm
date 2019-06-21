@@ -25,4 +25,4 @@ EXPOSE 80
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "otm/app/otm_start.py"]
+CMD ["python", "otm_start.py"]
