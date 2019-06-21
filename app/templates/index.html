@@ -83,6 +83,7 @@
                             url: `/save/${$("#lastname").val()}/${$("#name").val()}/${$("#insurNr").val()}/${$("#insurName").val()}/`,
                             success: data => {
                             console.log(data);
+                            location.reload();
                             }
                             });
                          //   location.reload();   
