@@ -16,6 +16,7 @@ RUN pip install --upgrade pip
 RUN pip install flask
 RUN pip install psycopg2-binary
 
+COPY ./app .
 # RUN git clone https://github.com/mightyMarabu/otm.git
 
 EXPOSE 80
