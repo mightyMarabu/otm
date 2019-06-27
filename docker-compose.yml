@@ -13,7 +13,7 @@ services:
           condition: on-failure
     ports:
       - "7001:80"
-  networks:
-    - testnet
+    networks:
+      - testnet
 networks:
   testnet:
