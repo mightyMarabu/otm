@@ -11,8 +11,8 @@ services:
           memory: 50M
         restart_policy:
           condition: on-failure
-  ports:
-    - "7001:80"
+    ports:
+      - "7001:80"
   networks:
     - testnet
 networks:
