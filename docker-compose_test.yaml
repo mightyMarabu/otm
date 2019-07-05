@@ -1,11 +1,27 @@
 # maintainer: sebastian
 version: "3"
 services:
-  goeserver:
-#  image: mightymarabu/postgresql_extended
-    image: oscarfonts/geoserver:latest
+  primary:
+    image: crunchydata/crunchy-postgres:centos7-10.3-1.8.2
+    environment:
+      - PGHOST=/tmp
+      - MAX_CONNECTIONS=10
+      - MAX_WAL_SENDERS=5
+      - PG_MODE=primary
+      - PG_PRIMARY_USER=primaryuser
+      - PG_PRIMARY_PASSWORD=password
+      - PG_DATABASE=testdb
+      - PG_USER=testuser
+      - PG_PASSWORD=password
+      - PG_ROOT_PASSWORD=password
+      - PG_PRIMARY_PORT=5432
+    volumes:
+      - pg-primary-vol:/pgdata
     deploy:
-      replicas: 3
+      placement:
+        constraints:
+        - node.labels.type == primary
+#        - node.role == worker
       resources:
          limits:
           cpus: "0.1"
@@ -13,16 +29,40 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "8181:8080"
+      - "5432"
     networks:
       - supertestnet
-  visualizer:
-    image: mightymarabu/postgresql_extended
+  replica:
+    image: crunchydata/crunchy-postgres:centos7-10.3-1.8.2
+    environment:
+    - PGHOST=/tmp
+    - MAX_CONNECTIONS=10
+    - MAX_WAL_SENDERS=5
+    - PG_MODE=replica
+    - PG_PRIMARY_HOST=primary
+    - PG_PRIMARY_PORT=5432
+    - PG_PRIMARY_USER=primaryuser
+    - PG_PRIMARY_PASSWORD=password
+    - PG_DATABASE=testdb
+    - PG_USER=testuser
+    - PG_PASSWORD=password
+    - PG_ROOT_PASSWORD=password
+    volumes:
+    - pg-replica-vol:/pgdata
     ports:
-      - "5432:5432"
-    deploy:
-      replicas: 2
+    - "5432"
     networks:
       - supertestnet
+    deploy:
+      reolicas: 2
+      placement:
+        constraints:
+        - node.labels.type != primary
+#        - node.role == worker
+
 networks:
   supertestnet:
+
+volumes:
+  pg-primary-vol:
+  pg-replica-vol:
