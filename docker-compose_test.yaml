@@ -1,9 +1,9 @@
 # maintainer: sebastian
 version: "3"
 services:
-  web:
+  goeserver:
 #  image: mightymarabu/postgresql_extended
-    image: mightymarabu/otm:develop
+    image: oscarfonts/geoserver:latest
     deploy:
       replicas: 3
       resources:
@@ -13,19 +13,16 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "7001:80"
+      - "8181:8080"
     networks:
-      - otmnet
+      - supertestnet
   visualizer:
-    image: dockersamples/visualizer:stable
+    image: mightymarabu/postgresql_extended
     ports:
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "5432:5432"
     deploy:
-      placement:
-        constraints: [node.role == manager]
+      replicas: 2
     networks:
-      - otmnet
+      - supertestnet
 networks:
-  otmnet:
+  supertestnet:
