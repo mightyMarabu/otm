@@ -60,6 +60,18 @@ services:
         - node.labels.type != primary
 #        - node.role == worker
 
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.type == primary]
+    networks:
+      - supertestnet
+
 networks:
   supertestnet:
 
