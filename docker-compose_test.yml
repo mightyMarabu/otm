@@ -54,7 +54,7 @@ services:
     networks:
       - supertestnet
     deploy:
-      reolicas: 2
+      replicas: 2
       placement:
         constraints:
         - node.labels.type != primary
