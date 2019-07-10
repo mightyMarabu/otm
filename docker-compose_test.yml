@@ -68,7 +68,8 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       placement:
-        constraints: [node.type == primary]
+        constraints: 
+        - node.labels.type == primary
     networks:
       - supertestnet
 
